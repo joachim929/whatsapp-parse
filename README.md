@@ -1,5 +1,17 @@
 # WhatsappParser
 
+Stuff to test:
+
+\_a_ = _a_
+
+_a _ = _a _
+
+_ a_ = _ a_
+
+\_a__a_ = _a_\_a_
+
+\_a _ a_ = _a _ a_
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
 
 ## Development server

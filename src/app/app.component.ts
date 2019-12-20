@@ -10,10 +10,10 @@ import {SecondIterationService} from './second-iteration.service';
 export class AppComponent {
   title = 'whatsapp-parser';
 
-  testString = '*Test test*' + // bold
+  mess = '_Test test_' + // bold
     ' *t*e*s*t *test*' + // bold
     '*test* ' + // not bold
-    '*t* *e*'; // bold
+    '_*a*_';
 
   formattedString: string;
 
@@ -21,7 +21,6 @@ export class AppComponent {
     private firstService: FirstIterationService,
     private secondService: SecondIterationService
   ) {
-    // console.log(this.firstService.indexTest(this.testString));
-    this.formattedString = this.secondService.spacingMethod();
+    this.formattedString = this.secondService.spacingMethod(this.mess);
   }
 }

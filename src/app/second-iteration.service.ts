@@ -4,46 +4,61 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class SecondIterationService {
-  mess = '*Test test*' + // bold
-    ' *t*e*s*t *test*' + // bold
-    '*test* ' + // not bold
-    '*t* *e*'; // bold
+  formattedArray = [];
+  starHold: number;
+  lineHold: number;
 
   constructor() {
   }
 
-  spacingMethod() {
-    const formattedString = [];
+  spacingMethod(message: string) {
+    this.formattedArray = [];
 
-    if (this.mess.length < 2) {
-      console.log('String length is 1: ', this.mess);
+    if (message.length < 2) {
+      console.log('String length is 1: ', message);
       return;
     }
 
-    let tHold: number;
-    const tArr = [];
-    for (let j = 0; j < this.mess.length; j++) {
-      tArr[j] = this.mess[j];
-      if (this.mess[j] === '*') {
-        if (typeof tHold === 'undefined') {
-          if (j === 0) {
-            if (this.mess[j + 1] !== ' ') {
-              tHold = j;
-            }
-          } else if (this.mess[j + 1] !== ' ' && this.mess[j - 1] !== '*') {
-            tHold = j;
-          }
-        } else {
-          if (((j + 1) === this.mess.length) || this.mess[j + 1] === ' ' || this.mess[j + 1] === '*') {
-            tArr[tHold] = '<strong>';
-            tArr[j] = '</strong>';
-            tHold = undefined;
-          }
-        }
+    let starHold: number;
+    let lineHold: number;
+    for (let j = 0; j < message.length; j++) {
+      this.formattedArray[j] = message[j];
+      if (message[j] === '*') {
+        starHold = this.findTags(message, starHold, '*', j);
+        console.log(starHold, j);
+      }
+      if (message[j] === '_') {
+        lineHold = this.findTags(message, lineHold, '_', j);
+        console.log(lineHold, j);
       }
     }
-    console.log(tArr.join(''));
 
-    return tArr.join('');
+    return this.formattedArray.join('');
+  }
+
+  findTags(message, hold, starOrLine, index) {
+    if (typeof hold === 'undefined') {
+      hold = this.findStartTag(index, message, starOrLine);
+    } else {
+      if (((index + 1) === message.length) || message[index + 1] === ' ' || message[index + 1] === starOrLine) {
+        const tag = starOrLine === '*' ? 'strong' : 'i';
+        this.formattedArray[hold] = `<${tag}>`;
+        this.formattedArray[index] = `</${tag}>`;
+        hold = undefined;
+      }
+    }
+    return hold;
+  }
+
+  findStartTag(index, message, starOrLine) {
+    let hold: number;
+    if (index === 0) {
+      if (message[index + 1] !== ' ') {
+        hold = index;
+      }
+    } else if (message[index + 1] !== ' ' && message[index - 1] !== starOrLine) {
+      hold = index;
+    }
+    return hold;
   }
 }
