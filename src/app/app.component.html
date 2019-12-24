@@ -1,1 +1,4 @@
-<p [innerHTML]="formattedString | whatsAppToHtml"></p>
+<label for="text-area">Enter some text with WhatsApp markup</label>
+<textarea id="text-area" [formControl]="textFormControl"></textarea>
+
+<p *ngIf="textFormControl.value" [innerHTML]="textFormControl.value | whatsAppToHtml"></p>

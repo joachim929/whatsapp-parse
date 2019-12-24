@@ -12,7 +12,7 @@ export class WhatsAppToHtmlPipe implements PipeTransform {
   }
 
   findTextToParse(value: string): string {
-    const toParse = value.match(/([\*\_\~](?!\s)).+?(?<!\s)\1/g);
+    const toParse = value.match(/([\*\_\~](?!\s)).+?(?:[^"\s]+|\s(?!"))\1/g);
     if (!toParse) {
       return value;
     }

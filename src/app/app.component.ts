@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +9,10 @@ import {Component} from '@angular/core';
 export class AppComponent {
   title = 'whatsapp-parser';
 
-  mess = '_Test test_' + // bold
-    ' *t*e*s*t *test*' + // bold
-    '*test* ' + // not bold
-    '_*a*_';
-
-  formattedString: string;
+  textFormControl = new FormControl();
 
   constructor(
   ) {
+    console.log('hi');
   }
 }
