@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {FirstIterationService} from './first-iteration.service';
-import {SecondIterationService} from './second-iteration.service';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +16,6 @@ export class AppComponent {
   formattedString: string;
 
   constructor(
-    private firstService: FirstIterationService,
-    private secondService: SecondIterationService
   ) {
-    this.formattedString = this.secondService.spacingMethod(this.mess);
   }
 }
